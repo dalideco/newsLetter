@@ -6,9 +6,12 @@ const port = process.env.PORT || 3000;
 
 const app = express(); 
 app.use(bodyParser.urlencoded({extended:true}));
+app.set('view engine','ejs');
 
 app.get("/", (req, res)=>{
-    res.sendFile(__dirname +"/index.html");
+    res.render("index", {
+        news:true
+    })
 })
 
 app.post("/", (req,res)=>{
@@ -30,16 +33,14 @@ app.post("/", (req,res)=>{
     const url ='https://us1.api.mailchimp.com/3.0/lists/f027d4be30'
     const options ={
         method:'POST', 
-        auth:'dalideco:b56e1e04da09431c61bf20bde64b6275-us1'
+        auth:'dalideco:ab56e1e04da09431c61bf20bde64b6275-us1'
 
     }
     const myReq=https.request(url, options, response =>{
-        if(response.statusCode ==200){
-            res.sendFile(__dirname + "/success.html");
-        }
-        else {
-            res.sendFile(__dirname +"/fail.html");
-        }
+        res.render('index', {
+            news:false,
+            status: (response.statusCode===200),
+        })
         response.on("data",(data)=>{
             console.log(JSON.parse(data))
         })

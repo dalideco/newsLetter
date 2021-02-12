@@ -39,7 +39,7 @@
         }
         @keyframes shown{
             100%{
-                height: auto;
+                height: 300px;
                 padding: 20px 40px;
                 opacity: 1;
                 -webkit-box-shadow: 5px 5px 22px 5px rgba(0,0,0,0.26); 
@@ -71,12 +71,26 @@
 </head>
 <body>
     <div class ="myBody">
-        <form action="/fail" method="POST">
-            <label 
-                style="margin-bottom:10px; color: red"
-            >Request failed loading. Please try again.</label>
-            <button type ="submit">Try again!</button>
-        </form>
+        <% if(news===true){ %>
+            <form action="/" method="POST">
+                <label for="name"> Name:  </label>
+                <input id ="name" placeholder ="your name" name="name" required>
+                <label for="email"> E-mail: </label>
+                <input id ="email" type="email" name="address"
+                    placeholder ="___@___.com"
+                    required>
+                <button type ="submit">Sign Up!</button>
+            </form>
+        <% }else{ %>
+           <% if (status){ %>
+                <form action="/success" method="POST">
+                    <h1 style="color:green">Success</h1>
+                </form>
+            <% } else { %>
+                <form action="/fail" method="POST">
+                    <h1 style="color: red">fail</h1>
+                </form>
+            <%}}%>
     </div>
 </body>
 </html>
