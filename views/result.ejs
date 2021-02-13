@@ -1,0 +1,9 @@
+<% if (status){ %>
+    <form action="/success" method="POST">
+        <h1 style="color:green">Success</h1>
+    </form>
+<% } else { %>
+    <form action="/fail" method="POST">
+        <h1 style="color: red">fail</h1>
+    </form>
+<%}%>
